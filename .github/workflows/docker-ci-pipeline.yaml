@@ -20,5 +20,5 @@ jobs:
           password:  ${{ secrets.DOCKER_SECRET_NAME }}
           
       - name: Push Image to hub
-        run: docker push ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1 .
+        run: docker push ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1
        
