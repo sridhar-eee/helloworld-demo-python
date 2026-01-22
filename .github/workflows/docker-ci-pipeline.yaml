@@ -20,7 +20,7 @@ jobs:
         run: docker ps -a
 
       - name: verify the URL
-        run: curl -v http://localhost:8080/
+        run: curl -4 -v http://localhost:8080
 
       - name: docker login
         uses: docker/login-action@v3.6.0
