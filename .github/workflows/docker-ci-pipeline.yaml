@@ -1,5 +1,10 @@
 name: docker-ci-pipeline
-on: push
+on: 
+  push: 
+    paths-ignore:
+      - 'LICENSE'
+      - '*.md'
+      - '/sample'
 jobs:
   docker-ci-jon:
     runs-on: ubuntu-latest
