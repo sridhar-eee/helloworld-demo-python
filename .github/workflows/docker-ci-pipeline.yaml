@@ -16,6 +16,9 @@ jobs:
       - name: create container
         run: docker run --name python-app -itd -p 8080:8080 ${{ vars.DOCKER_USERNAME }}/helloworld-demo-python:v1
 
+      - name: sleep time to create container
+        run: sleep 20
+
       - name: verify container status
         run: docker ps -a
 
