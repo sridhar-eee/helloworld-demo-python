@@ -41,7 +41,8 @@ jobs:
        
       - name: Cleanup
         run: docker rm -f python-app
- k8s-cd-job:
+
+  k8s-cd-job:
     needs: docker-ci-job
     runs-on: ubuntu-latest
     steps:
