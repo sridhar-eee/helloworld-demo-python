@@ -56,7 +56,7 @@ jobs:
         run:  kubectl get pods -A
 
       - name: set namespace
-        run:  kubectl config set-contect --current --namespace=sri1
+        run:  kubectl config set-context --current --namespace=sri1
 
       - name:  create deployment
         run:  kubectl apply -f k8s/.
