@@ -6,7 +6,7 @@ on:
       - '*.md'
       - '/sample'
 jobs:
-  docker-ci-jon:
+  docker-ci-job:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
@@ -42,3 +42,34 @@ jobs:
       - name: Cleanup
         run: docker rm -f python-app
         
+ k8s-cd-job:
+    needs: docker-ci-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v6
+
+      - name: setup-minikube
+        uses: medyagh/setup-minikube@latest
+
+      - name: Check minikube
+        run:  kubectl get pods -A
+
+      - name: set namespace
+        run:  kubectl config set-contect --current --namespace=sri1
+
+      - name:  create deployment
+        run:  kubectl apply -f k8s/.
+
+      - name:  wait for pod creation
+        run: kubectl wait --for=condition=ready pod -l app=python
+
+      - name:  get status deployment
+        run:  kubectl get ns,deploy,service -n app=python
+
+      - name:  Test URL
+        run:  minikube service list
+              minikube service my-service --url
+              echo -n "------------------opening the service------------------"
+              curl $(minikube service my-service --url)/version              
+
