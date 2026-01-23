@@ -68,8 +68,8 @@ jobs:
         run:  kubectl get ns,deploy,service -n app=python
 
       - name:  Test URL
-        run:  minikube service list
+        run:  |
+              minikube service list
               minikube service my-service -n sri1 --url
               echo -n "------------------opening the service------------------"
               curl $(minikube service my-service -n sri1 --url)/version              
-
